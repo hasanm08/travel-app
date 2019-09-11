@@ -36,6 +36,6 @@ class Navigation extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(items: items,type: BottomNavigationBarType.fixed,);
+    return BottomNavigationBar(items: items,type: BottomNavigationBarType.shifting, currentIndex: 0,);
   }
 }
