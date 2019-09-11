@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutvideo/ScondPage.dart';
 import 'Navigation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -248,7 +249,9 @@ class _HomeTop extends State<HomeTop>{
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 32,vertical: 13),
                       suffixIcon: Material(
-                        child: Icon(Icons.search,color: Colors.black,),
+                        child: InkWell(child: Icon(Icons.search,color: Colors.black,),onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder:(context){return SecondPage();} ));
+                        },),
                         elevation: 2.0,
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       )
