@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Navigation.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'Navigation.dart';
 import'SecondPage.dart';
 
 double width ;
@@ -15,7 +16,7 @@ void main() {
 }
  ThemeData appTheme=ThemeData(
   primaryColor:Colors.purple //Colors.tealAccent,
-  ,cardColor:Colors.blue //Colors.teal
+     , secondaryHeaderColor: Colors.blue //Colors.teal
   // fontFamily:
 );
 
@@ -30,7 +31,7 @@ class HomeScreen extends StatelessWidget{
     double w=width*0.15;
     // TODO: implement build
     return Scaffold(
-bottomNavigationBar: Navigation(),
+      bottomNavigationBar: Navigation(),
       floatingActionButton: FloatingActionButton(onPressed: (){showDialog(context: context,builder: (context){
         return  AlertDialog(
           title: Text("More Info :"),
@@ -137,11 +138,16 @@ bottomNavigationBar: Navigation(),
         ,)
       ;},child: Icon(Icons.info_outline),backgroundColor: appTheme.primaryColor.withOpacity(.5),),
 
-      body:Column(
-        children: <Widget>[
-          HomeTop(),
-          HomeDown,
-        ],
+      body:
+      SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: <Widget>[
+            HomeTop(),
+            HomeDown,
+            HomeDown
+          ],
+        ),
       ) ,
 
 
@@ -171,7 +177,7 @@ class _HomeTop extends State<HomeTop>{
             //color: Colors.tealAccent,
             decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-                appTheme.primaryColor,appTheme.cardColor
+                appTheme.primaryColor, appTheme.secondaryHeaderColor
               ])
             ),
             child: Column(

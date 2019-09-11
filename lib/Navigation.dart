@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'main.dart';
 class Navigation extends StatelessWidget {
   final List<BottomNavigationBarItem> items=[];
@@ -36,6 +37,9 @@ class Navigation extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(items: items,type: BottomNavigationBarType.shifting, currentIndex: 0,);
+    return BottomNavigationBar(items: items,
+      type: BottomNavigationBarType.shifting,
+      currentIndex: 0,
+      elevation: 1.5,);
   }
 }
