@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tutvideo/ScondPage.dart';
 import 'Navigation.dart';
 import 'package:url_launcher/url_launcher.dart';
+import'SecondPage.dart';
 
 double width ;
 double height ;
