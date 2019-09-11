@@ -1,5 +1,5 @@
 # Hasanm08 Flutter Project
 
-A new Flutter application.
+Just a simple app. to have a release version message me
 
 ![Screenshot](Screenshot.png)
