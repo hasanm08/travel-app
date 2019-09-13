@@ -29,7 +29,6 @@ class HomeScreen extends StatelessWidget{
      height = MediaQuery.of(context).size.height;
     double h=height*0.10;
     double w=width*0.15;
-    // TODO: implement build
     return Scaffold(
       bottomNavigationBar: Navigation(),
       floatingActionButton: FloatingActionButton(onPressed: (){showDialog(context: context,builder: (context){
@@ -51,7 +50,7 @@ class HomeScreen extends StatelessWidget{
                     shape: StadiumBorder(),
                     color: Colors.white,
                     onPressed: () async {
-                      const url='mailto:hasanmahani08@gmail.com?subject=I am using MIN pa08 so';
+                      const url = 'mailto:hasanmahani08@gmail.com?subject=I am using your flutter project so';
                       // const url = 'https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=hasanmahani08@gmail.com&su=I+am+using+MIN+pa08+so&ui=2&tf=1';
                       if (await canLaunch(url)) {
                         await launch(url);
@@ -166,7 +165,6 @@ class _HomeTop extends State<HomeTop>{
   var isFlightSelected=true;
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Stack(
       children: <Widget>[
         ClipPath(
@@ -300,11 +298,15 @@ class Clipper08 extends CustomClipper<Path> {
     final Path path=Path();
     path.lineTo(0.0, size.height);
    // path.lineTo(size.width, 0.0);
+    // ignore: non_constant_identifier_names
     var End=Offset(size.width/2, size.height-30.0);
+    // ignore: non_constant_identifier_names
     var Control=Offset(size.width/4,size.height-50.0);
 
     path.quadraticBezierTo(Control.dx, Control.dy, End.dx, End.dy);
+    // ignore: non_constant_identifier_names
     var End2=Offset(size.width, size.height-80.0);
+    // ignore: non_constant_identifier_names
     var Control2=Offset(size.width*.75,size.height-10.0);
 
     path.quadraticBezierTo(Control2.dx, Control2.dy, End2.dx, End2.dy);
@@ -407,7 +409,6 @@ class City extends StatelessWidget{
   const City({Key key, this.image, this.monthyear, this.oldprice, this.name, this.discount, this.newprice}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return
       Column(
 
