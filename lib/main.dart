@@ -15,8 +15,8 @@ void main() {
   ));
 }
  ThemeData appTheme=ThemeData(
-  primaryColor:Colors.purple //Colors.tealAccent,
-     , secondaryHeaderColor: Colors.blue //Colors.teal
+     primaryColor: Colors.purple, /* Colors.tealAccent,*/
+     secondaryHeaderColor: Colors.blue /* Colors.teal*/
   // fontFamily:
 );
 
