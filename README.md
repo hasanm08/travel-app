@@ -7,10 +7,5 @@ t.me/hasanm08
 <p></p>
 
 
-<p align="center">
-  <img  src="Screenshot2.png">
-</p>
-<p align="center">
-  <img  src="Screenshot3.png">
-</p>
+
 
