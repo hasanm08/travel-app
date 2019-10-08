@@ -183,7 +183,7 @@ packages:
       name: url_launcher
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.1.2"
+    version: "5.1.4"
   vector_math:
     dependency: transitive
     description:

@@ -1,17 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tutvideo/main.dart' as prefix0;
-
 import 'main.dart';
 
 final Color discountBackground = prefix0.appTheme.primaryColor;
 final Color flightColor = prefix0.appTheme.primaryColor;
-final Color chipBackground = prefix0.appTheme.secondaryHeaderColor.withOpacity(
-    .2);
+final Color chipBackground = prefix0.appTheme.secondaryHeaderColor.withOpacity(.2);
 final Color BorderColor = prefix0.appTheme.primaryColor.withAlpha(100);
+String Fromlocation;
+String Tolocation;
 class SecondPage extends StatelessWidget{
+  String Fromloc;
+  String Toloc;
+  SecondPage({this.Fromloc,this.Toloc});
+
   @override
   Widget build(BuildContext context) {
+    Fromlocation=Fromloc;
+    Tolocation=Toloc;
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: () {
@@ -160,7 +166,7 @@ class FlightCard extends StatelessWidget {
               right: 15,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
-                width: prefix0.width * .08,
+                width: prefix0.width * .09,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     color: discountBackground.withOpacity(.2)
@@ -208,8 +214,8 @@ class Tag extends StatelessWidget {
 class StackTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Key From;
-    Key To;
+   Key From;
+   Key To;
     return Material(
       elevation: 0,
       child: Stack(
@@ -247,15 +253,15 @@ class StackTop extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(prefix0.locs[0] +
-                                ' Beauty and old place \n(City name Can have any lentgh)',
+                            Text(/*prefix0.locs[0]*/ Fromlocation+
+                               /* ' Beauty and old place */'\n (City name Can have any lentgh)',
                               style: TextStyle(
                                   fontSize: 16.0
                               ), key: From,
                             ),
                             Divider(color: Colors.black12,
                               height: prefix0.height * .04,),
-                            Text(prefix0.locs[1] + ' Imam reza Holy Shrine',
+                            Text(/*prefix0.locs[1]*/Tolocation /*+ ' Imam reza Holy Shrine'*/,
                               style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold

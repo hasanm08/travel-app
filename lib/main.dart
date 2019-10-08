@@ -1,15 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:tutvideo/Notifications.dart' as prefix0;
+import 'package:tutvideo/WishList.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'Navigation.dart';
+import 'Deals.dart';
 import'SecondPage.dart';
-
+int sel=0;
 double width ;
 double height ;
+final bodies=[HomeScreen(),WishList(),Deals(),prefix0.Notification()];
+
+
+class BottomNav extends StatefulWidget {
+  BottomNav({Key key}) : super(key: key);
+
+  _BottomNavState createState() => _BottomNavState();
+  
+}
+
+class _BottomNavState extends State<BottomNav> {
+  List<BottomNavigationBarItem> itemscreate (){
+    List<BottomNavigationBarItem> items=[];
+     items.add(
+        BottomNavigationBarItem(
+            activeIcon: Icon(Icons.home,color: appTheme.primaryColor,),
+            icon: Icon(Icons.home,color: Colors.black,),
+            title: Text("Explore",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontStyle: FontStyle.normal),)
+        )
+    );
+    items.add(
+        BottomNavigationBarItem(
+            activeIcon: Icon(Icons.favorite,color: appTheme.primaryColor,),
+            icon: Icon(Icons.favorite,color: Colors.black,),
+            title: Text("WishList",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontStyle: FontStyle.normal),)
+        )
+    );
+    items.add(
+        BottomNavigationBarItem(
+            activeIcon: Icon(Icons.local_offer,color: appTheme.primaryColor,),
+            icon: Icon(Icons.local_offer,color: Colors.black,),
+            title: Text("Deals",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontStyle: FontStyle.normal),)
+        )
+    );
+    items.add(
+        BottomNavigationBarItem(
+          //backgroundColor: Colors.blue,
+            activeIcon: Icon(Icons.notifications,color: appTheme.primaryColor,),
+            icon: Icon(Icons.notifications,color: Colors.black,),
+            title: Text("Notifications",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontStyle: FontStyle.normal),)
+        )
+    );
+    return items;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: bodies.elementAt(sel),
+      bottomNavigationBar:
+     BottomNavigationBar(
+       items:itemscreate() ,
+        type: BottomNavigationBarType.shifting,
+      currentIndex: sel,
+      elevation: 1.5,
+      onTap: (int index){
+       // if(index != sel){
+          
+          setState((){
+            sel=index;
+          });
+       // }
+      },
+     )
+    );
+  }
+}
 void main() {
+  
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: HomeScreen(),
+    home: BottomNav(),
     theme: appTheme,
     title: "hasanm08 Flutter Project",
   ));
@@ -23,14 +91,14 @@ void main() {
 class HomeScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-
+ // Navigation.selindex=0;
 
     width = MediaQuery.of(context).size.width;
      height = MediaQuery.of(context).size.height;
     double h=height*0.10;
     double w=width*0.15;
     return Scaffold(
-      bottomNavigationBar: Navigation(),
+     // bottomNavigationBar: /*NavigationTest()*/Navigation(),
       floatingActionButton: FloatingActionButton(onPressed: (){showDialog(context: context,builder: (context){
         return  AlertDialog(
           title: Text("More Info :"),
@@ -153,8 +221,9 @@ class HomeScreen extends StatelessWidget{
     );
   }
 
-}
 
+}
+ 
 var selectedloc=0;
 List<String> locs=['Kerman (KER)','Mashhad (MASH)'];
 class HomeTop extends StatefulWidget{
@@ -163,6 +232,7 @@ class HomeTop extends StatefulWidget{
 }
 class _HomeTop extends State<HomeTop>{
   var isFlightSelected=true;
+  TextEditingController c=TextEditingController(text: locs[1]);
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -242,7 +312,8 @@ class _HomeTop extends State<HomeTop>{
                   elevation: 5.0,
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   child: TextField(
-                    controller: TextEditingController(text: locs[1]),
+                    controller:
+                    c,
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black,
@@ -254,7 +325,9 @@ class _HomeTop extends State<HomeTop>{
                       contentPadding: EdgeInsets.symmetric(horizontal: 32,vertical: 13),
                       suffixIcon: Material(
                         child: InkWell(child: Icon(Icons.search,color: Colors.black,),onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder:(context){return SecondPage();} ));
+                          Navigator.push(context, MaterialPageRoute(builder:(context){
+                            return SecondPage(Fromloc:locs[selectedloc],Toloc:c.text
+                            );} ));
                         },),
                         elevation: 2.0,
                         borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -420,15 +493,19 @@ class City extends StatelessWidget{
                  children: <Widget>[
                    Padding(
                      padding: const EdgeInsets.symmetric(horizontal: 5),
-
                      child: Container(height: height*.2,
                          width: width*.45,
-                         child: Image.asset(image,fit: BoxFit.cover,)),
+                      //   child: Image.asset(image,fit: BoxFit.cover,)
+                      decoration: BoxDecoration(
+                        image: DecorationImage(image: AssetImage(image),fit: BoxFit.fill)
+                      ),
+                         ),
 
                    ),Positioned(
                      height:60 ,
-                     width: width*.5,
+                     width: width*.45,
                      left: 5,
+                     //right: 0,
                      bottom: 0,
                      child: Container(
                        decoration: BoxDecoration(
