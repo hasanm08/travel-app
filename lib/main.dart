@@ -211,8 +211,8 @@ class HomeScreen extends StatelessWidget{
         child: Column(
           children: <Widget>[
             HomeTop(),
-            HomeDown,
-            HomeDown
+            homeDown,
+            homeDown
           ],
         ),
       ) ,
@@ -231,7 +231,7 @@ class HomeTop extends StatefulWidget{
   _HomeTop createState()=>_HomeTop();
 }
 class _HomeTop extends State<HomeTop>{
-  var isFlightSelected=true;
+  var isFlightselected=true;
   TextEditingController c=TextEditingController(text: locs[1]);
   @override
   Widget build(BuildContext context) {
@@ -326,7 +326,7 @@ class _HomeTop extends State<HomeTop>{
                       suffixIcon: Material(
                         child: InkWell(child: Icon(Icons.search,color: Colors.black,),onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder:(context){
-                            return SecondPage(Fromloc:locs[selectedloc],Toloc:c.text
+                            return SecondPage(fromloc:locs[selectedloc],toloc:c.text
                             );} ));
                         },),
                         elevation: 2.0,
@@ -340,16 +340,16 @@ class _HomeTop extends State<HomeTop>{
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    InkWell(child: Choice08(icon: Icons.flight_takeoff,text: "Flights",Selected:isFlightSelected),
+                    InkWell(child: Choice08(icon: Icons.flight_takeoff,text: "Flights",selected:isFlightselected),
                     onTap:(){
                       setState(() {
-                        isFlightSelected=true;
+                        isFlightselected=true;
                       });
                     },),
                   SizedBox(width: width*0.055,),
-                    InkWell(child: Choice08(icon: Icons.hotel,text: "Hotels",Selected:! isFlightSelected),
+                    InkWell(child: Choice08(icon: Icons.hotel,text: "Hotels",selected:! isFlightselected),
                     onTap: (){setState(() {
-                      isFlightSelected=false;
+                      isFlightselected=false;
                     })
                     ;},)
 
@@ -402,8 +402,8 @@ class Clipper08 extends CustomClipper<Path> {
 class Choice08 extends StatefulWidget {
   final IconData icon;
   final String text;
-  final bool Selected;
-  Choice08({this.icon,this.text,this.Selected});
+  final bool selected;
+  Choice08({this.icon,this.text,this.selected});
   @override
   _Choice08State createState() => _Choice08State();
 }
@@ -413,7 +413,7 @@ class _Choice08State extends State<Choice08> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 18,vertical: 8),
-      decoration:widget.Selected?
+      decoration:widget.selected?
       BoxDecoration(
         color: Colors.white.withOpacity(.30),
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -440,7 +440,7 @@ var viewallstyle=TextStyle(
     fontSize: 14,
   color: appTheme.primaryColor//Colors.teal
 );
-var HomeDown=Column(
+var homeDown=Column(
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -464,12 +464,12 @@ var HomeDown=Column(
         child:
         ListView(
           scrollDirection: Axis.horizontal,
-          children:Cities
+          children:cities
         ),
       )
     ],
 );
-List<City> Cities=[
+List<City> cities=[
   City(image:"assets/Kerman.png",name: "Kerman",monthyear: "Far 1399",oldprice: "258500",newprice: "150000",discount: "58",),
   City(image:"assets/Mashhad.png",name: "Mashhad",monthyear: "Far 1399",oldprice: "258500",newprice: "150000",discount: "58",),
   City(image:"assets/Tehran.png",name: "Tehran",monthyear: "Far 1399",oldprice: "258500",newprice: "150000",discount: "58",),
