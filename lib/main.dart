@@ -7,7 +7,7 @@ import'SecondPage.dart';
 double width ;
 double height ;
 void main() {
-  runApp(MaterialApp(
+  runApp(MaterialApp( 
     debugShowCheckedModeBanner: false,
     home: HomeScreen(),
     theme: appTheme,
