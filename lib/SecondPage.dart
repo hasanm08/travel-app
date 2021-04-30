@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tutvideo/main.dart' as prefix0;
+import 'main.dart' as prefix0;
 import 'main.dart';
 
 final Color discountBackground = prefix0.appTheme.primaryColor;
@@ -8,12 +8,12 @@ final Color flightColor = prefix0.appTheme.primaryColor;
 final Color chipBackground =
     prefix0.appTheme.secondaryHeaderColor.withOpacity(.2);
 final Color borderColor = prefix0.appTheme.primaryColor.withAlpha(100);
-String fromlocation;
-String tolocation;
+String? fromlocation;
+String? tolocation;
 
 class SecondPage extends StatelessWidget {
-  String fromloc;
-  String toloc;
+  String? fromloc;
+  String? toloc;
   SecondPage({this.fromloc, this.toloc});
 
   @override
@@ -101,12 +101,12 @@ class StackDown extends StatelessWidget {
 }
 
 class FlightCard extends StatelessWidget {
-  String price;
-  String flightTo;
-  String percentOff;
-  String date;
-  double rating;
-  String oldprice;
+  String? price;
+  String? flightTo;
+  String? percentOff;
+  String? date;
+  double? rating;
+  String? oldprice;
 
   FlightCard(
       {this.date,
@@ -125,11 +125,11 @@ class FlightCard extends StatelessWidget {
           children: <Widget>[
             Container(
               //height: prefix0.height/6,
-              width: prefix0.width * .8,
+              width: prefix0.width! * .8,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.lerp(
-                    Radius.elliptical(10, 20), Radius.circular(20), 2)),
+                    Radius.elliptical(10, 20), Radius.circular(20), 2)!),
                 border: Border.all(color: borderColor),
               ),
               child: Column(
@@ -139,15 +139,15 @@ class FlightCard extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Text(
-                        price + '\$',
+                        price! + '\$',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        width: prefix0.width * .02,
+                        width: prefix0.width! * .02,
                       ),
                       Text(
-                        oldprice + '\$',
+                        oldprice! + '\$',
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -157,21 +157,21 @@ class FlightCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: prefix0.height * .03,
+                    height: prefix0.height! * .03,
                   ),
                   Wrap(
                     spacing: 5.0,
                     runSpacing: -5.0,
                     children: <Widget>[
                       Tag(
-                        label: date,
+                        label: date!,
                         avatar: Icon(
                           Icons.calendar_today,
                           size: 18,
                         ),
                       ),
                       Tag(
-                        label: flightTo,
+                        label: flightTo!,
                         avatar: Icon(Icons.flight_takeoff, size: 18),
                       ),
                       Tag(
@@ -184,17 +184,17 @@ class FlightCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: prefix0.height * .025,
+              top: prefix0.height! * .025,
               right: 15,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 2, vertical: 3),
-                width: prefix0.width * .09,
+                width: prefix0.width! * .09,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                     color: discountBackground.withOpacity(.2)),
                 child: Center(
                   child: Text(
-                    percentOff + '%',
+                    percentOff! + '%',
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w200,
@@ -211,17 +211,18 @@ class FlightCard extends StatelessWidget {
 }
 
 class Tag extends StatelessWidget {
-  String label;
-  Widget avatar;
+  String? label;
+  Widget? avatar;
 
   Tag({this.avatar, this.label});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 5),
       child: RawChip(
         label: Text(
-          label,
+          label!,
         ),
         labelStyle: TextStyle(
             fontWeight: FontWeight.w400, fontSize: 8, color: Colors.black),
@@ -237,8 +238,8 @@ class Tag extends StatelessWidget {
 class StackTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Key from;
-    Key to;
+    // Key from;
+    // Key to;
     return Material(
       elevation: 0,
       child: Stack(
@@ -246,7 +247,7 @@ class StackTop extends StatelessWidget {
           ClipPath(
             clipper: Clipper08(),
             child: Container(
-              height: height * .272, //400
+              height: height! * .272, //400
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -260,15 +261,16 @@ class StackTop extends StatelessWidget {
           Column(
             children: <Widget>[
               SizedBox(
-                height: prefix0.height * .04,
+                height: prefix0.height! * .04,
               ),
               Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                margin: EdgeInsets.symmetric(horizontal: prefix0.height * .035),
+                margin:
+                    EdgeInsets.symmetric(horizontal: prefix0.height! * .035),
                 elevation: 10,
                 child: Container(
-                  padding: EdgeInsets.all(prefix0.height * .035),
+                  padding: EdgeInsets.all(prefix0.height! * .035),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
@@ -279,20 +281,20 @@ class StackTop extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              /*prefix0.locs[0]*/ fromlocation +
+                              /*prefix0.locs[0]*/ fromlocation! +
                                   /* ' Beauty and old place */ '\n (City name Can have any lentgh)',
                               style: TextStyle(fontSize: 16.0),
-                              key: from,
+                              // key: from,
                             ),
                             Divider(
                               color: Colors.black12,
-                              height: prefix0.height * .04,
+                              height: prefix0.height! * .04,
                             ),
                             Text(
-                              /*prefix0.locs[1]*/ tolocation /*+ ' Imam reza Holy Shrine'*/,
+                              /*prefix0.locs[1]*/ tolocation! /*+ ' Imam reza Holy Shrine'*/,
                               style: TextStyle(
                                   fontSize: 16.0, fontWeight: FontWeight.bold),
-                              key: to,
+                              // key: to,
                             ),
                           ],
                         ),
@@ -304,7 +306,7 @@ class StackTop extends StatelessWidget {
                               icon: Icon(
                                 Icons.import_export,
                                 color: Colors.black,
-                                size: prefix0.height * .07,
+                                size: prefix0.height! * .07,
                               ),
                               onPressed: () {
                                 // TODO Swap To And From texts

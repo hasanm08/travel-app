@@ -3,7 +3,7 @@ import 'main.dart';
 
 //Unused
 class Navigation extends StatelessWidget {
-  static int selindex;
+  static int? selindex;
   static List<BottomNavigationBarItem> items = [];
 
   Navigation() {
@@ -78,7 +78,7 @@ class Navigation extends StatelessWidget {
     return BottomNavigationBar(
       items: items,
       type: BottomNavigationBarType.shifting,
-      currentIndex: selindex,
+      currentIndex: selindex!,
       elevation: 1.5,
       // ignore: non_constant_identifier_names
       // onTap: (SelectedIndex){
