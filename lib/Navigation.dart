@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 //Unused
+// ignore: must_be_immutable
 class Navigation extends StatelessWidget {
   static int? selindex;
   static List<BottomNavigationBarItem> items = [];
@@ -16,13 +17,7 @@ class Navigation extends StatelessWidget {
           Icons.home,
           color: Colors.black,
         ),
-        title: Text(
-          "Explore",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal),
-        )));
+        label: "Explore"));
     items.add(BottomNavigationBarItem(
         activeIcon: Icon(
           Icons.favorite,
@@ -32,13 +27,7 @@ class Navigation extends StatelessWidget {
           Icons.favorite,
           color: Colors.black,
         ),
-        title: Text(
-          "WishList",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal),
-        )));
+        label: "WishList"));
     items.add(BottomNavigationBarItem(
         activeIcon: Icon(
           Icons.local_offer,
@@ -48,13 +37,7 @@ class Navigation extends StatelessWidget {
           Icons.local_offer,
           color: Colors.black,
         ),
-        title: Text(
-          "Deals",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal),
-        )));
+        label: "Deals"));
     items.add(BottomNavigationBarItem(
         //backgroundColor: Colors.blue,
         activeIcon: Icon(
@@ -65,66 +48,23 @@ class Navigation extends StatelessWidget {
           Icons.notifications,
           color: Colors.black,
         ),
-        title: Text(
-          "Notifications",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal),
-        )));
+        label: "Notifications"));
   }
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: items,
       type: BottomNavigationBarType.shifting,
+      selectedLabelStyle: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
+          fontStyle: FontStyle.normal),
+      unselectedLabelStyle: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
+          fontStyle: FontStyle.normal),
       currentIndex: selindex!,
       elevation: 1.5,
-      // ignore: non_constant_identifier_names
-      // onTap: (SelectedIndex){
-      //   if(selindex == SelectedIndex){
-      //    print(selindex.toString()+"?"+SelectedIndex.toString());
-      //    switch (SelectedIndex) {
-      //     case 1:
-      //       Navigator.push(context, MaterialPageRoute(
-      //     builder: (context){
-      //         return WishList();
-      //     }
-      //   ));
-
-      //     break;
-      //      case 0:
-      //     Navigator.push(context, MaterialPageRoute(
-      //   builder: (context){
-      //       return HomeScreen();
-      //   }
-      // ));
-
-      //     break;
-      //      case 2:
-      //     Navigator.push(context, MaterialPageRoute(
-      //   builder: (context){
-      //       return WishList();
-      //   }
-      // ));
-
-      //     break;
-      //      case 3:
-      //     Navigator.push(context, MaterialPageRoute(
-      //   builder: (context){
-      //       return WishList();
-      //   }
-      // ));
-
-      //     break;
-      //   }
-
-      // }
-
-      //print(SelectedIndex);
-
-      // }
-      //,
     );
   }
 
@@ -149,13 +89,7 @@ class _NavigationTest extends State<NavigationTest> {
           Icons.home,
           color: Colors.black,
         ),
-        title: Text(
-          "Explore",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal),
-        )));
+        label: "Explore"));
     items.add(BottomNavigationBarItem(
         activeIcon: Icon(
           Icons.favorite,
@@ -165,13 +99,7 @@ class _NavigationTest extends State<NavigationTest> {
           Icons.favorite,
           color: Colors.black,
         ),
-        title: Text(
-          "WishList",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal),
-        )));
+        label: "WishList"));
     items.add(BottomNavigationBarItem(
         activeIcon: Icon(
           Icons.local_offer,
@@ -181,13 +109,7 @@ class _NavigationTest extends State<NavigationTest> {
           Icons.local_offer,
           color: Colors.black,
         ),
-        title: Text(
-          "Deals",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal),
-        )));
+        label: "Deals"));
     items.add(BottomNavigationBarItem(
         activeIcon: Icon(
           Icons.notifications,
@@ -197,13 +119,7 @@ class _NavigationTest extends State<NavigationTest> {
           Icons.notifications,
           color: Colors.black,
         ),
-        title: Text(
-          "Notifications",
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal),
-        )));
+        label: "Notifications"));
 
     return BottomNavigationBar(
       items: items,
@@ -211,19 +127,14 @@ class _NavigationTest extends State<NavigationTest> {
       currentIndex: -1 + 1,
       elevation: 1.5,
       onTap: (sel) {},
-      // ignore: non_constant_identifier_names
-      /* onTap: (SelectedIndex){
-        while(true){
-          print(SelectedIndex);
-
-        }
-        print(SelectedIndex);
-        index=SelectedIndex;
-
-        setState(() {
-        });
-      }*/
-      /*,*/
+      selectedLabelStyle: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
+          fontStyle: FontStyle.normal),
+      unselectedLabelStyle: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
+          fontStyle: FontStyle.normal),
     );
   }
 

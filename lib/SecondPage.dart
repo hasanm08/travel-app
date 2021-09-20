@@ -12,8 +12,8 @@ String? fromlocation;
 String? tolocation;
 
 class SecondPage extends StatelessWidget {
-  String? fromloc;
-  String? toloc;
+  final String? fromloc;
+  final String? toloc;
   SecondPage({this.fromloc, this.toloc});
 
   @override
@@ -101,12 +101,12 @@ class StackDown extends StatelessWidget {
 }
 
 class FlightCard extends StatelessWidget {
-  String? price;
-  String? flightTo;
-  String? percentOff;
-  String? date;
-  double? rating;
-  String? oldprice;
+  final String? price;
+  final String? flightTo;
+  final String? percentOff;
+  final String? date;
+  final double? rating;
+  final String? oldprice;
 
   FlightCard(
       {this.date,

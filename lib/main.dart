@@ -129,10 +129,12 @@ class HomeScreen extends StatelessWidget {
                       child: SizedBox(
                         height: 50,
                         width: 50,
-                        child: RaisedButton(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            onPrimary: Colors.white,
+                          ),
                           child: Image.asset('assets/images/gmail.png'),
-                          shape: StadiumBorder(),
-                          color: Colors.white,
                           onPressed: () async {
                             const url =
                                 'mailto:hasanmahani08@gmail.com?subject=I am using your flutter project so';
@@ -151,10 +153,12 @@ class HomeScreen extends StatelessWidget {
                       child: SizedBox(
                         height: h,
                         width: w,
-                        child: RaisedButton(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            onPrimary: Colors.white,
+                          ),
                           child: Image.asset('assets/images/instagram.png'),
-                          shape: StadiumBorder(),
-                          color: Colors.white,
                           onPressed: () async {
                             const url = 'https://www.instagram.com/hasanm108/';
                             if (await canLaunch(url)) {
@@ -171,10 +175,12 @@ class HomeScreen extends StatelessWidget {
                       child: SizedBox(
                         height: h,
                         width: w,
-                        child: RaisedButton(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            onPrimary: Colors.white,
+                          ),
                           child: Image.asset('assets/images/telegram.png'),
-                          shape: StadiumBorder(),
-                          color: Colors.white,
                           onPressed: () async {
                             const url = 'https://t.me/hasanm08';
                             if (await canLaunch(url)) {
@@ -191,10 +197,12 @@ class HomeScreen extends StatelessWidget {
                       child: SizedBox(
                         height: h,
                         width: w,
-                        child: RaisedButton(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            onPrimary: Colors.white,
+                          ),
                           child: Image.asset('assets/images/whatsapp.png'),
-                          shape: StadiumBorder(),
-                          color: Colors.white,
                           onPressed: () async {
                             const url = 'https://wa.me/+989910187797';
                             if (await canLaunch(url)) {
