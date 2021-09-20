@@ -1,4 +1,4 @@
-# Hasanm08 Flutter Project
+# Hasanm08 Flutter Project [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/hasanm08/flutter)
 
 Just a simple app. to have a release version message me
 <p></p>
