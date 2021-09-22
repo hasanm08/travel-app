@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-permissions: read-all
+permissions: read-all|write-all
 
 jobs:
   build:
