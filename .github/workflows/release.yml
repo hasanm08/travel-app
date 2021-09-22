@@ -8,37 +8,57 @@ on:
 permissions: read-all
 
 jobs:
-  clean:
-    name: clean packages
-    runs-on: ubuntu-latest
-    steps:
-      - name: clean packages
-        run: flutter clean
-  get:
-    name: get packages
-    runs-on: ubuntu-latest
-    needs: clean
-    steps:
-      - name: get packages
-        run: flutter pub get
-  build_apk:
-    name: build apk
-    runs-on: ubuntu-latest
-    needs: [clean, get]
-    steps:
-      - name: build apk
-        run: flutter build apk --release --split-per-abi
-  build_ios:
-    name: build ios
+  build:
+    name: Build Apps
     runs-on: macos-latest
-    needs: [clean, get]
     steps:
-      - name: build ios
-        run: flutter build ios
-  build_web:
-    name: build web
-    runs-on: ubuntu-latest
-    needs: [clean, get]
-    steps:
-      - name: build web
-        run: flutter build web
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "15"
+          distribution: "adopt"
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - name: Install pub Dependencies
+        run: flutter pub get
+      - name: Run Tests
+        run: flutter test
+      - name: Build Android App
+        run: flutter build apk --split-per-abi
+      - name: Build iOS App
+        run: |
+          flutter build ios --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
+      - name: Build Web App with auto renderer
+        run: |
+          flutter build web --web-renderer auto
+          cd build/web
+          zip -r web-app-auto.zip .
+      - name: Build Web App with html renderer
+        run: |
+          flutter build web --web-renderer html
+          cd build/web
+          zip -r web-app-html.zip .
+      - name: Build Web App with canvaskit renderer
+        run: |
+          flutter build web --web-renderer canvaskit
+          cd build/web
+          zip -r web-app-canvaskit.zip .
+      - name: Release Apps
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "build/app/outputs/apk/release/*.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
