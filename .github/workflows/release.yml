@@ -1,4 +1,4 @@
-name: "android release"
+name: "build multiplatform apps"
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions: read-all
 jobs:
   build:
     name: Build Apps
-    runs-on: macos-latest
+    runs-on: macos-11
     steps:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
