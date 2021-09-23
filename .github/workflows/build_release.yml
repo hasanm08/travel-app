@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build Apps
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     steps:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
@@ -26,16 +26,16 @@ jobs:
       - name: Install pub Dependencies
         run: flutter pub get
       - name: Build Android App
-        run: flutter build apk
-      # - name: Build iOS App
-      #   run: |
-      #     flutter build ios --no-codesign
-      #     cd build/ios/iphoneos
-      #     mkdir Payload
-      #     cd Payload
-      #     ln -s ../Runner.app
-      #     cd ..
-      #     zip -r app.ipa Payload
+        run: flutter build apk --split-per-abi
+      - name: Build iOS App
+        run: |
+          flutter build ios --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
       - name: Build Web App with auto renderer
         run: |
           flutter build web --web-renderer auto
@@ -51,18 +51,10 @@ jobs:
           flutter build web --web-renderer canvaskit
           cd build/web
           zip -r web-app-canvaskit.zip .
-      - uses: actions/checkout@master
-      - name: send custom telegram message with apk
-        uses: appleboy/telegram-action@master
-        with:
-          to: -1001581018347
-          token: 2049450038:AAEsI1t58F4nrTK3XQ2rynImLBjPqc1xMms
-          document: build/app/outputs/apk/release/app-release.apk
-          # document: build/web/web-app-html.zip
       - name: Release Apps
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.APP_VERSION }}
           name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "build/app/outputs/apk/release/app-release.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
+          artifacts: "build/app/outputs/apk/release/*.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
