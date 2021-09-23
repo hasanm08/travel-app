@@ -57,12 +57,12 @@ jobs:
         with:
           to: -1001581018347
           token: 2049450038:AAEsI1t58F4nrTK3XQ2rynImLBjPqc1xMms
-          document: build/app/outputs/flutter-apk/app-release.apk
-          message: sent from https://github.com/hasanm08/travel-app
+          document: build/app/outputs/apk/release/app-release.apk
+          # document: build/web/web-app-html.zip
       - name: Release Apps
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.APP_VERSION }}
           name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
+          artifacts: "build/app/outputs/apk/release/app-release.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
