@@ -39,6 +39,7 @@ jobs:
       - name: Build Fuchsia App
         run: |
           flutter config — enable-fuchsia
+          flutter create .
           flutter build fuchsia
           cd build/fuchsia/
           zip -r fuchsia.zip fuchsia
