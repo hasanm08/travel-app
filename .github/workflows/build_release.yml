@@ -22,7 +22,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v1
         with:
-          channel: "master"
+          channel: "stable"
       - name: Install pub Dependencies
         run: flutter pub get
       - name: Build Android App
@@ -36,13 +36,13 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
-      - name: Build Fuchsia App
-        run: |
-          flutter config — enable-fuchsia
-          flutter create .
-          flutter build fuchsia
-          cd build/fuchsia/
-          zip -r fuchsia.zip fuchsia
+#       - name: Build Fuchsia App
+#         run: |
+#           flutter config — enable-fuchsia
+#           flutter create .
+#           flutter build fuchsia
+#           cd build/fuchsia/
+#           zip -r fuchsia.zip fuchsia
 
       - name: Build Web App with auto renderer
         run: |
