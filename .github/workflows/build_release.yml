@@ -8,7 +8,7 @@ on:
 jobs:
   build-windows:
     name: Build Windows
-    runs-on: windows-latest-8-cores
+    runs-on: windows-latest
     steps:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
