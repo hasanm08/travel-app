@@ -6,6 +6,41 @@ on:
       - master
 
 jobs:
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest-8-cores
+    steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: "15"
+          distribution: "adopt"
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: Install pub Dependencies
+        run: flutter pub get
+      - name: Enable Windows
+        run: flutter config --enable-windows-desktop
+
+      - name: Build Windows
+        run: |
+          flutter build windows --tree-shake-icons
+          cd build/windows/runner/Release
+          zip -r windows-app.zip .
+      - name: Release Apps
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "build/windows/runner/Release/windows-app.zip"
+
   build:
     name: Build Apps
     runs-on: macos-11
@@ -59,18 +94,10 @@ jobs:
           flutter build web --web-renderer canvaskit
           cd build/web
           zip -r web-app-canvaskit.zip .
-      - name: Enable Windows
-        run: flutter config --enable-windows-desktop
-
-      - name: Build Windows
-        run: |
-          flutter build windows --tree-shake-icons
-          cd build/windows/runner/Release
-          zip -r windows-app.zip .
       - name: Release Apps
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.APP_VERSION }}
           name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "build/windows/runner/Release/windows-app.zip,build/app/outputs/apk/release/*.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
+          artifacts: "build/app/outputs/apk/release/*.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
