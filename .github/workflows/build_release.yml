@@ -6,9 +6,6 @@ on:
       - master
 
 jobs:
-  container-test-job:
-    runs-on: macos-11
-    container: node:14.16
   setup-flutter:
     name: setup Flutter
     runs-on: macos-11
