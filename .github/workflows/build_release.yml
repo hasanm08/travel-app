@@ -6,40 +6,40 @@ on:
       - master
 
 jobs:
-  build-windows:
-    name: Build Windows
-    runs-on: windows-latest
-    steps:
-      - name: Export Release Timestamp
-        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: "15"
-          distribution: "adopt"
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: "stable"
-      - name: Install pub Dependencies
-        run: flutter pub get
-      - name: Enable Windows
-        run: flutter config --enable-windows-desktop
+  # build-windows:
+  #   name: Build Windows
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Export Release Timestamp
+  #       run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+  #     - name: Set up Java
+  #       uses: actions/setup-java@v3
+  #       with:
+  #         java-version: "15"
+  #         distribution: "adopt"
+  #     - name: Set up Flutter
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         channel: "stable"
+  #     - name: Install pub Dependencies
+  #       run: flutter pub get
+  #     - name: Enable Windows
+  #       run: flutter config --enable-windows-desktop
 
-      - name: Build Windows
-        run: |
-          flutter build windows --tree-shake-icons
-          cd build/windows/runner/Release
-          zip -r windows-app.zip .
-      - name: Release Apps
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ env.APP_VERSION }}
-          name: ${{ env.APP_VERSION }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "build/windows/runner/Release/windows-app.zip"
+  #     - name: Build Windows
+  #       run: |
+  #         flutter build windows --tree-shake-icons
+  #         cd build/windows/runner/Release
+  #         zip -r windows-app.zip .
+  #     - name: Release Apps
+  #       uses: ncipollo/release-action@v1
+  #       with:
+  #         tag: ${{ env.APP_VERSION }}
+  #         name: ${{ env.APP_VERSION }}
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         artifacts: "build/windows/runner/Release/windows-app.zip"
 
   build:
     name: Build Apps
