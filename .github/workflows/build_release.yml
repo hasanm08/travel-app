@@ -13,14 +13,14 @@ jobs:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
           java-version: "15"
           distribution: "adopt"
       - name: Set up Flutter
-        uses: subosito/flutter-action@v1
+        uses: subosito/flutter-action@v2
         with:
           channel: "stable"
       - name: Install pub Dependencies
@@ -36,13 +36,13 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
-#       - name: Build Fuchsia App
-#         run: |
-#           flutter config — enable-fuchsia
-#           flutter create .
-#           flutter build fuchsia
-#           cd build/fuchsia/
-#           zip -r fuchsia.zip fuchsia
+      #       - name: Build Fuchsia App
+      #         run: |
+      #           flutter config — enable-fuchsia
+      #           flutter create .
+      #           flutter build fuchsia
+      #           cd build/fuchsia/
+      #           zip -r fuchsia.zip fuchsia
 
       - name: Build Web App with auto renderer
         run: |
