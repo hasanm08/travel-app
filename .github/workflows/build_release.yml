@@ -1,4 +1,4 @@
-name: "build multiplatform apps"
+name: "build multi platform apps"
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  build:
-    name: Build Apps
+  setup-flutter:
+    name: setup Flutter
     runs-on: macos-11
     steps:
       - name: Export Release Timestamp
@@ -23,10 +23,23 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+      - name: Enable Windows
+        uses: flutter config --enable-windows-desktop
       - name: Install pub Dependencies
         run: flutter pub get
+
+  build-android:
+    name: Build Android
+    runs-on: macos-11
+    needs: [setup-flutter]
+    steps:
       - name: Build Android App
         run: flutter build apk --split-per-abi
+  build-ios:
+    name: Build IOS
+    runs-on: macos-11
+    needs: [setup-flutter]
+    steps:
       - name: Build iOS App
         run: |
           flutter build ios --no-codesign
@@ -43,7 +56,11 @@ jobs:
       #           flutter build fuchsia
       #           cd build/fuchsia/
       #           zip -r fuchsia.zip fuchsia
-
+  build-web:
+    name: Build WEB
+    runs-on: macos-11
+    needs: [setup-flutter]
+    steps:
       - name: Build Web App with auto renderer
         run: |
           flutter build web --web-renderer auto
@@ -59,10 +76,25 @@ jobs:
           flutter build web --web-renderer canvaskit
           cd build/web
           zip -r web-app-canvaskit.zip .
+  build-windows:
+    name: Build Windows
+    runs-on: macos-11
+    needs: [setup-flutter]
+    steps:
+      - name: Build Windows
+        run: |
+          flutter build windows --tree-shake-icons
+          cd build/windows/runner/Release
+          zip -r windows-app.zip .
+  release:
+    name: Release
+    runs-on: macos-11
+    needs: [build-windows, build-web, build-ios, build-android]
+    steps:
       - name: Release Apps
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.APP_VERSION }}
           name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "fuchsia.zip,build/app/outputs/apk/release/*.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
+          artifacts: "build/windows/runner/Release/windows-app.zip,build/app/outputs/apk/release/*.apk,build/ios/iphoneos/app.ipa,build/web/web-app-auto.zip,build/web/web-app-html.zip,build/web/web-app-canvaskit.zip"
