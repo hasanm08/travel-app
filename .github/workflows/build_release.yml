@@ -62,15 +62,15 @@ jobs:
         run: flutter pub get
       - name: Build Android App
         run: flutter build apk --split-per-abi
-      - name: Build iOS App
-        run: |
-          flutter build ios --no-codesign
-          cd build/ios/iphoneos
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
-          zip -r app.ipa Payload
+      # - name: Build iOS App
+      #   run: |
+      #     flutter build ios --no-codesign
+      #     cd build/ios/iphoneos
+      #     mkdir Payload
+      #     cd Payload
+      #     ln -s ../Runner.app
+      #     cd ..
+      #     zip -r app.ipa Payload
       #       - name: Build Fuchsia App
       #         run: |
       #           flutter config — enable-fuchsia
